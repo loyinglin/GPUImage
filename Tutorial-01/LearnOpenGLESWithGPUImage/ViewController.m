@@ -29,6 +29,7 @@
     GPUImageSepiaFilter* filter = [[GPUImageSepiaFilter alloc] init];
     UIImage* image = [UIImage imageNamed:@"face"];
     [self.mImageView setImage:[filter imageByFilteringImage:image]];
+    
 }
 
 - (void)didReceiveMemoryWarning {

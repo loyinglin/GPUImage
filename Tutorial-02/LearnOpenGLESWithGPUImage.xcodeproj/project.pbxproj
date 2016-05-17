@@ -15,7 +15,6 @@
 		FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD25D1CE1CD7A00C7B6AC /* Assets.xcassets */; };
 		FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD25F1CE1CD7A00C7B6AC /* LaunchScreen.storyboard */; };
 		FDAAD26C1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD26B1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m */; };
-		FDAAD2771CE1CE3A00C7B6AC /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD2761CE1CE3A00C7B6AC /* face.png */; };
 		FDAAD27B1CE1D40700C7B6AC /* custom.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD27A1CE1D40700C7B6AC /* custom.fsh */; };
 		FDAAD27D1CE2D0FE00C7B6AC /* custom.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD27C1CE2D0FE00C7B6AC /* custom.vsh */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 		FDAAD2671CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnOpenGLESWithGPUImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD26B1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearnOpenGLESWithGPUImageTests.m; sourceTree = "<group>"; };
 		FDAAD26D1CE1CD7B00C7B6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FDAAD2761CE1CE3A00C7B6AC /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		FDAAD27A1CE1D40700C7B6AC /* custom.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = custom.fsh; sourceTree = "<group>"; };
 		FDAAD27C1CE2D0FE00C7B6AC /* custom.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = custom.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +86,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD164C611CEB68000014E5DD /* useless */ = {
+			isa = PBXGroup;
+			children = (
+				FDAAD27A1CE1D40700C7B6AC /* custom.fsh */,
+				FDAAD27C1CE2D0FE00C7B6AC /* custom.vsh */,
+			);
+			name = useless;
+			sourceTree = "<group>";
+		};
 		FDAAD2451CE1CD7A00C7B6AC = {
 			isa = PBXGroup;
 			children = (
@@ -115,9 +122,6 @@
 				FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */,
 				FDAAD2571CE1CD7A00C7B6AC /* ViewController.h */,
 				FDAAD2581CE1CD7A00C7B6AC /* ViewController.m */,
-				FDAAD27A1CE1D40700C7B6AC /* custom.fsh */,
-				FDAAD27C1CE2D0FE00C7B6AC /* custom.vsh */,
-				FDAAD2761CE1CE3A00C7B6AC /* face.png */,
 				FDAAD25A1CE1CD7A00C7B6AC /* Main.storyboard */,
 				FDAAD25D1CE1CD7A00C7B6AC /* Assets.xcassets */,
 				FDAAD25F1CE1CD7A00C7B6AC /* LaunchScreen.storyboard */,
@@ -130,6 +134,7 @@
 		FDAAD2511CE1CD7A00C7B6AC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FD164C611CEB68000014E5DD /* useless */,
 				FDAAD2521CE1CD7A00C7B6AC /* main.m */,
 			);
 			name = "Supporting Files";
@@ -229,7 +234,6 @@
 			files = (
 				FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */,
 				FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */,
-				FDAAD2771CE1CE3A00C7B6AC /* face.png in Resources */,
 				FDAAD27B1CE1D40700C7B6AC /* custom.fsh in Resources */,
 				FDAAD27D1CE2D0FE00C7B6AC /* custom.vsh in Resources */,
 				FDAAD25C1CE1CD7A00C7B6AC /* Main.storyboard in Resources */,
