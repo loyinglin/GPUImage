@@ -29,9 +29,7 @@
     [super viewDidLoad];
     
     _videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
-    _videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-    _videoCamera.horizontallyMirrorFrontFacingCamera = NO;
-    _videoCamera.horizontallyMirrorRearFacingCamera = NO;
+    _videoCamera.outputImageOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
     _filter = [[GPUImageSepiaFilter alloc] init];
     _filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
@@ -121,7 +119,7 @@
     }
 }
 
-- (IBAction)updateSliderValue:(id)sender
+- (void)updateSliderValue:(id)sender
 {
     [(GPUImageSepiaFilter *)_filter setIntensity:[(UISlider *)sender value]];
 }
