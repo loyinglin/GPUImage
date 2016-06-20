@@ -60,7 +60,6 @@
     GPUImageUIElement *uielement = [[GPUImageUIElement alloc] initWithView:subView];
     
 //    GPUImageTransformFilter 动画的filter
-    
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]);
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
@@ -94,7 +93,7 @@
         frame.origin.x += 1;
         frame.origin.y += 1;
         imageView.frame = frame;
-//        [uielement updateWithTimestamp:time];
+        [uielement updateWithTimestamp:time];
     }];
     
     [movieWriter setCompletionBlock:^{
