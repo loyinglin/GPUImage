@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD65AC151D1B949800C5C1A4 /* qwe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD65AC141D1B949800C5C1A4 /* qwe.mp4 */; };
+		FD65AC221D1C29BA00C5C1A4 /* THImageMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = FD65AC1D1D1C29BA00C5C1A4 /* THImageMovie.m */; };
+		FD65AC231D1C29BA00C5C1A4 /* THImageMovieManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD65AC1F1D1C29BA00C5C1A4 /* THImageMovieManager.m */; };
+		FD65AC241D1C29BA00C5C1A4 /* THImageMovieWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = FD65AC211D1C29BA00C5C1A4 /* THImageMovieWriter.m */; };
 		FD6BA4491D12A8420080EB2D /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4481D12A8420080EB2D /* abc.mp4 */; };
 		FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4501D12CE440080EB2D /* Main.storyboard */; };
 		FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2521CE1CD7A00C7B6AC /* main.m */; };
@@ -50,6 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD65AC141D1B949800C5C1A4 /* qwe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = qwe.mp4; sourceTree = "<group>"; };
+		FD65AC1C1D1C29BA00C5C1A4 /* THImageMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THImageMovie.h; sourceTree = "<group>"; };
+		FD65AC1D1D1C29BA00C5C1A4 /* THImageMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THImageMovie.m; sourceTree = "<group>"; };
+		FD65AC1E1D1C29BA00C5C1A4 /* THImageMovieManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THImageMovieManager.h; sourceTree = "<group>"; };
+		FD65AC1F1D1C29BA00C5C1A4 /* THImageMovieManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THImageMovieManager.m; sourceTree = "<group>"; };
+		FD65AC201D1C29BA00C5C1A4 /* THImageMovieWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THImageMovieWriter.h; sourceTree = "<group>"; };
+		FD65AC211D1C29BA00C5C1A4 /* THImageMovieWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THImageMovieWriter.m; sourceTree = "<group>"; };
 		FD6BA4481D12A8420080EB2D /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.mp4; sourceTree = "<group>"; };
 		FD6BA4511D12CE440080EB2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDAAD24E1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnOpenGLESWithGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +105,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FD65AC1B1D1C29BA00C5C1A4 /* TH */ = {
+			isa = PBXGroup;
+			children = (
+				FD65AC1C1D1C29BA00C5C1A4 /* THImageMovie.h */,
+				FD65AC1D1D1C29BA00C5C1A4 /* THImageMovie.m */,
+				FD65AC1E1D1C29BA00C5C1A4 /* THImageMovieManager.h */,
+				FD65AC1F1D1C29BA00C5C1A4 /* THImageMovieManager.m */,
+				FD65AC201D1C29BA00C5C1A4 /* THImageMovieWriter.h */,
+				FD65AC211D1C29BA00C5C1A4 /* THImageMovieWriter.m */,
+			);
+			path = TH;
+			sourceTree = "<group>";
+		};
 		FDAAD2451CE1CD7A00C7B6AC = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +140,8 @@
 		FDAAD2501CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */ = {
 			isa = PBXGroup;
 			children = (
+				FD65AC1B1D1C29BA00C5C1A4 /* TH */,
+				FD65AC141D1B949800C5C1A4 /* qwe.mp4 */,
 				FD6BA4501D12CE440080EB2D /* Main.storyboard */,
 				FD6BA4481D12A8420080EB2D /* abc.mp4 */,
 				FDAAD2541CE1CD7A00C7B6AC /* AppDelegate.h */,
@@ -264,6 +290,7 @@
 				FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */,
 				FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */,
 				FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */,
+				FD65AC151D1B949800C5C1A4 /* qwe.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD65AC221D1C29BA00C5C1A4 /* THImageMovie.m in Sources */,
+				FD65AC231D1C29BA00C5C1A4 /* THImageMovieManager.m in Sources */,
 				FDAAD2591CE1CD7A00C7B6AC /* ViewController.m in Sources */,
+				FD65AC241D1C29BA00C5C1A4 /* THImageMovieWriter.m in Sources */,
 				FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */,
 				FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */,
 			);
