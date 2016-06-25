@@ -370,7 +370,6 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         return;
     }
     
-//    if (_hasAudioTrack && CMTIME_IS_VALID(startTime))
     if (_hasAudioTrack)
     {
         CFRetain(audioBuffer);
