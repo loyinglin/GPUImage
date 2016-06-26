@@ -489,7 +489,6 @@ NSString *const kTHImageColorSwizzlingFragmentShaderString = SHADER_STRING
                     }
                 }
             }
-            
         }
         
         if(completedOrFailed){

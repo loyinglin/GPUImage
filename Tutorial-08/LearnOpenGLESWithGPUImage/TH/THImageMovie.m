@@ -312,17 +312,7 @@ THImageMovie
         [reader cancelReading];
 
         [weakSelf endProcessing];
-//        if (keepLooping) {
-//            reader = nil;
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self startProcessing];
-//            });
-//        } else {
-//            [weakSelf endProcessing];
-//        }
-
     }
-
     return NO;
 }
 
