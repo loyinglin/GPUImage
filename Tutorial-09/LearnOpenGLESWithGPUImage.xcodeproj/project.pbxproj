@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0605081D24C44800E663A7 /* SimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0605071D24C44800E663A7 /* SimpleEditor.m */; };
 		FD65AC151D1B949800C5C1A4 /* qwe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD65AC141D1B949800C5C1A4 /* qwe.mp4 */; };
 		FD65AC221D1C29BA00C5C1A4 /* THImageMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = FD65AC1D1D1C29BA00C5C1A4 /* THImageMovie.m */; };
 		FD65AC231D1C29BA00C5C1A4 /* THImageMovieManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD65AC1F1D1C29BA00C5C1A4 /* THImageMovieManager.m */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD0605061D24C44800E663A7 /* SimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleEditor.h; sourceTree = "<group>"; };
+		FD0605071D24C44800E663A7 /* SimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleEditor.m; sourceTree = "<group>"; };
 		FD65AC141D1B949800C5C1A4 /* qwe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = qwe.mp4; sourceTree = "<group>"; };
 		FD65AC1C1D1C29BA00C5C1A4 /* THImageMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THImageMovie.h; sourceTree = "<group>"; };
 		FD65AC1D1D1C29BA00C5C1A4 /* THImageMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THImageMovie.m; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 		FDAAD2501CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */ = {
 			isa = PBXGroup;
 			children = (
+				FD0605061D24C44800E663A7 /* SimpleEditor.h */,
+				FD0605071D24C44800E663A7 /* SimpleEditor.m */,
 				FD65AC1B1D1C29BA00C5C1A4 /* TH */,
 				FD65AC141D1B949800C5C1A4 /* qwe.mp4 */,
 				FD6BA4501D12CE440080EB2D /* Main.storyboard */,
@@ -312,6 +317,7 @@
 				FD65AC231D1C29BA00C5C1A4 /* THImageMovieManager.m in Sources */,
 				FDAAD2591CE1CD7A00C7B6AC /* ViewController.m in Sources */,
 				FD65AC241D1C29BA00C5C1A4 /* THImageMovieWriter.m in Sources */,
+				FD0605081D24C44800E663A7 /* SimpleEditor.m in Sources */,
 				FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */,
 				FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */,
 			);

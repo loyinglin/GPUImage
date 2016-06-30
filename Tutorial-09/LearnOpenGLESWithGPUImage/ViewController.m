@@ -7,71 +7,127 @@
 //
 
 #import "ViewController.h"
+#import "SimpleEditor.h"
 #import "GPUImage.h"
-
-#import "THImageMovieWriter.h"
-#import "THImageMovie.h"
-
+#import "GPUImageMovieComposition.h"
 #import <AssetsLibrary/ALAssetsLibrary.h>
 
 @interface ViewController ()
 @property (nonatomic , strong) UILabel  *mLabel;
-@property (nonatomic, strong) THImageMovieWriter *movieWriter;
+@property (nonatomic, strong) GPUImageMovieWriter *movieWriter;
+@property (nonatomic , strong) NSMutableArray *clipTimeRanges;
+@property (nonatomic , strong) NSMutableArray *clips;
+@property (nonatomic , strong) SimpleEditor *editor;
 @property(nonatomic) dispatch_group_t recordSyncingDispatchGroup;
+@property (nonatomic , strong) GPUImageMovieComposition *imageMovieComposition;
 @end
 
 
 @implementation ViewController
 {
-    THImageMovie *movieFile;
-    THImageMovie *movieFile2;
     GPUImageOutput<GPUImageInput> *filter;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.editor = [[SimpleEditor alloc] init];
+    self.clips = [[NSMutableArray alloc] init];
+    self.clipTimeRanges = [[NSMutableArray alloc] init];
+    
+    [self setupEditingAndPlayback];
+    
+    
     GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
     self.view = filterView;
+    filter = (GPUImageOutput<GPUImageInput> *)filterView;
     
     self.mLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 100)];
     self.mLabel.textColor = [UIColor redColor];
     [self.view addSubview:self.mLabel];
-    
-    filter = [[GPUImageDissolveBlendFilter alloc] init];
-    [(GPUImageDissolveBlendFilter *)filter setMix:0.5];
-    
-    // 播放
-    NSURL *sampleURL = [[NSBundle mainBundle] URLForResource:@"abc" withExtension:@"mp4"];
-    movieFile = [[THImageMovie alloc] initWithURL:sampleURL];
-    movieFile.runBenchmark = YES;
-    movieFile.playAtActualSpeed = YES;
-    
-    NSURL *sampleURL2 = [[NSBundle mainBundle] URLForResource:@"qwe" withExtension:@"mp4"];
-    movieFile2 = [[THImageMovie alloc] initWithURL:sampleURL2];
-    movieFile2.runBenchmark = YES;
-    movieFile2.playAtActualSpeed = YES;
-//
-    NSArray *thMovies = @[movieFile, movieFile2];
+}
 
+
+#pragma mark - Simple Editor
+
+- (void)setupEditingAndPlayback
+{
+    AVURLAsset *asset3 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"mp4"]]];
+    AVURLAsset *asset2 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"qwe" ofType:@"mp4"]]];
+    //    AVURLAsset *asset1 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eer" ofType:@"mp4"]]];
+    
+    
+    dispatch_group_t dispatchGroup = dispatch_group_create();
+    NSArray *assetKeysToLoadAndTest = @[@"tracks", @"duration", @"composable"];
+    
+    // 加载视频
+    //    [self loadAsset:asset1 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
+    [self loadAsset:asset2 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
+    [self loadAsset:asset3 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
+    
+    
+    // 等待就绪
+    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
+        [self synchronizeWithEditor];
+    });
+}
+
+- (void)loadAsset:(AVAsset *)asset withKeys:(NSArray *)assetKeysToLoad usingDispatchGroup:(dispatch_group_t)dispatchGroup
+{
+    dispatch_group_enter(dispatchGroup);
+    [asset loadValuesAsynchronouslyForKeys:assetKeysToLoad completionHandler:^(){
+        // 测试是否成功加载
+        BOOL bSuccess = YES;
+        for (NSString *key in assetKeysToLoad) {
+            NSError *error;
+            
+            if ([asset statusOfValueForKey:key error:&error] == AVKeyValueStatusFailed) {
+                NSLog(@"Key value loading failed for key:%@ with error: %@", key, error);
+                bSuccess = NO;
+                break;
+            }
+        }
+        if (![asset isComposable]) {
+            NSLog(@"Asset is not composable");
+            bSuccess = NO;
+        }
+        if (bSuccess && CMTimeGetSeconds(asset.duration) > 5) {
+            [self.clips addObject:asset];
+            [self.clipTimeRanges addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(0, 1), CMTimeMakeWithSeconds(5, 1))]];
+        }
+        else {
+            NSLog(@"error ");
+        }
+        dispatch_group_leave(dispatchGroup);
+    }];
+}
+
+/**
+ *  开始播放
+ */
+- (void)synchronizePlayerWithEditor
+{
     
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]);
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
     
-    self.movieWriter = [[THImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640, 480) movies:thMovies];
-
+    self.movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640, 480)];
     
-    // 响应链
-    [movieFile addTarget:filter];
-    [movieFile2 addTarget:filter];
     
-    // 显示到界面
-    [filter addTarget:filterView];
-    [filter addTarget:_movieWriter];
+    self.imageMovieComposition = [[GPUImageMovieComposition alloc] initWithComposition:self.editor.composition andVideoComposition:self.editor.videoComposition andAudioMix:self.editor.audioMix];
+    self.imageMovieComposition.playAtActualSpeed = YES;
+    self.imageMovieComposition.runBenchmark = YES;
     
-    [movieFile2 startProcessing];
-    [movieFile startProcessing];
+    [self.imageMovieComposition addTarget:self.movieWriter];
+    [self.imageMovieComposition addTarget:filter];
+    
+    [self.imageMovieComposition enableSynchronizedEncodingUsingMovieWriter:self.movieWriter];
+    self.imageMovieComposition.audioEncodingTarget = self.movieWriter;
+    
     [_movieWriter startRecording];
+    [self.imageMovieComposition startProcessing];
     
     CADisplayLink* dlink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateProgress)];
     [dlink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -80,10 +136,9 @@
     __weak typeof(self) weakSelf = self;
     [_movieWriter setCompletionBlock:^{
         __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf->filter removeTarget:strongSelf->_movieWriter];
-        [strongSelf->movieFile endProcessing];
-        [strongSelf->movieFile2 endProcessing];
-//        [strongSelf->_movieWriter finishRecording];
+        
+        [strongSelf->_movieWriter finishRecording];
+        [strongSelf->_imageMovieComposition endProcessing];
         
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
         if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(pathToMovie))
@@ -108,103 +163,52 @@
             NSLog(@"error mssg)");
         }
     }];
+    
+}
+
+- (void)synchronizeWithEditor
+{
+    // Clips
+    [self synchronizeEditorClipsWithOurClips];
+    [self synchronizeEditorClipTimeRangesWithOurClipTimeRanges];
+    
+    self.editor.transitionDuration = CMTimeMakeWithSeconds(1, 600);
+    [self.editor buildCompositionObjectsForPlayback];
+    [self synchronizePlayerWithEditor];
+    
 }
 
 
-- (void)printDuration:(NSURL *)url{
-    NSDictionary *inputOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
-    AVURLAsset *inputAsset = [[AVURLAsset alloc] initWithURL:url options:inputOptions];
+- (void)synchronizeEditorClipsWithOurClips
+{
+    NSMutableArray *validClips = [NSMutableArray array];
+    for (AVURLAsset *asset in self.clips) {
+        if (![asset isKindOfClass:[NSNull class]]) {
+            [validClips addObject:asset];
+        }
+    }
     
-    [inputAsset loadValuesAsynchronouslyForKeys:[NSArray arrayWithObject:@"tracks"] completionHandler: ^{
-        NSLog(@"movie: %@ duration: %.2f", url.lastPathComponent, CMTimeGetSeconds(inputAsset.duration));
-    }];
+    self.editor.clips = validClips;
 }
 
-
-- (void)setupAudioAssetReader {
-    
-    NSMutableArray *audioTracks = [NSMutableArray array];
-    
-    for(GPUImageMovie *movie in @[movieFile, movieFile2]){
-        AVAsset *asset = movie.asset;
-        if(asset){
-            NSArray *_audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
-            if(_audioTracks.count > 0){
-                [audioTracks addObject:_audioTracks.firstObject];
-            }
+- (void)synchronizeEditorClipTimeRangesWithOurClipTimeRanges
+{
+    NSMutableArray *validClipTimeRanges = [NSMutableArray array];
+    for (NSValue *timeRange in self.clipTimeRanges) {
+        if (! [timeRange isKindOfClass:[NSNull class]]) {
+            [validClipTimeRanges addObject:timeRange];
         }
     }
     
-    NSLog(@"audioTracks: %@", audioTracks);
-    
-    AVMutableComposition* mixComposition = [AVMutableComposition composition];
-    
-    for(AVAssetTrack *track in audioTracks){
-        if(![track isKindOfClass:[NSNull class]]){
-            NSLog(@"track url: %@ duration: %.2f", track.asset, CMTimeGetSeconds(track.asset.duration));
-            AVMutableCompositionTrack *compositionCommentaryTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio                                   preferredTrackID:kCMPersistentTrackID_Invalid];
-            [compositionCommentaryTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, track.asset.duration)
-                                                ofTrack:track
-                                                 atTime:kCMTimeZero error:nil];
-        }
-    }
-    
-    
-//    AVMutableComposition* videoComposition = [AVMutableComposition composition];
-    NSMutableArray *videoTracks = [NSMutableArray array];
-    
-    for(GPUImageMovie *movie in @[movieFile, movieFile2]){
-        AVAsset *asset = movie.asset;
-        if(asset){
-            NSArray *_videoTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
-            if(_videoTracks.count > 0){
-                [videoTracks addObject:_videoTracks.firstObject];
-            }
-        }
-    }
-    
-    NSLog(@"videoTracks: %@", videoTracks);
-    
-    for(AVAssetTrack *track in videoTracks){
-        if(![track isKindOfClass:[NSNull class]]){
-            NSLog(@"track url: %@ duration: %.2f", track.asset, CMTimeGetSeconds(track.asset.duration));
-            AVMutableCompositionTrack *compositionCommentaryTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo                                   preferredTrackID:kCMPersistentTrackID_Invalid];
-            [compositionCommentaryTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, track.asset.duration)
-                                                ofTrack:track
-                                                 atTime:kCMTimeZero error:nil];
-        }
-    }
-    
-//    NSMutableArray *trackMixArray = [NSMutableArray array];
-//    
-//    // Add AudioMix to fade in the volume ramps
-//    AVMutableAudioMixInputParameters *trackMix1 = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTracks[0]];
-//    
-//    [trackMix1 setVolumeRampFromStartVolume:1.0 toEndVolume:0.0 timeRange:CMTimeRangeMake(CMTimeMakeWithSeconds(1, 1), CMTimeMakeWithSeconds(5, 1))];
-//    
-//    [trackMixArray addObject:trackMix1];
-//    
-//    AVMutableAudioMixInputParameters *trackMix2 = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:audioTracks[1]];
-//    
-//    [trackMix2 setVolumeRampFromStartVolume:0.0 toEndVolume:1.0 timeRange:transitionTimeRanges[0]];
-//    [trackMix2 setVolumeRampFromStartVolume:1.0 toEndVolume:1.0 timeRange:passThroughTimeRanges[1]];
-//    
-//    [trackMixArray addObject:trackMix2];
-    
-    
-    AVAudioMix *audioMix = [AVMutableAudioMix audioMix];
-    
-    
-//    movieCompostion = [[GPUImageMovieComposition alloc] initWithComposition:mixComposition andVideoComposition:nil andAudioMix:audioMix];
+    self.editor.clipTimeRanges = validClipTimeRanges;
 }
-
 
 
 
 
 - (void)updateProgress
 {
-    self.mLabel.text = [NSString stringWithFormat:@"Progress:%d%%", (int)(movieFile.progress * 100)];
+    self.mLabel.text = [NSString stringWithFormat:@"Progress:%d%%", (int)(self.imageMovieComposition.progress * 100)];
     [self.mLabel sizeToFit];
 }
 
