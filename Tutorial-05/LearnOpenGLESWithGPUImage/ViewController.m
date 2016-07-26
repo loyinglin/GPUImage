@@ -20,6 +20,8 @@
 @property (nonatomic , strong) UILabel  *mLabel;
 @property (nonatomic , assign) long     mLabelTime;
 @property (nonatomic , strong) NSTimer  *mTimer;
+
+@property (nonatomic , strong) CADisplayLink *mDisplayLink;
 @end
 
 
@@ -58,6 +60,12 @@
         _videoCamera.outputImageOrientation = [UIApplication sharedApplication].statusBarOrientation;
     }];
     
+    self.mDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displaylink:)];
+    [self.mDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+}
+
+- (void)displaylink:(CADisplayLink *)displaylink {
+    NSLog(@"test");
 }
 
 
