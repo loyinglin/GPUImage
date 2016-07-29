@@ -1,28 +1,19 @@
-/*
-    Copyright (C) 2015 Apple Inc. All Rights Reserved.
-    See LICENSE.txt for this sample’s licensing information
-    
-    Abstract:
-    Vertex shader that passes attributes through to fragment shader.
- */
+//
+//  ViewController.m
+//  LearnOpenGLESWithGPUImage
+//
+//  Created by 林伟池 on 16/5/10.
+//  Copyright © 2016年 林伟池. All rights reserved.
+//
 
 attribute vec4 position;
 attribute vec2 texCoord;
-uniform float preferredRotation;
 
 varying vec2 texCoordVarying;
 
 void main()
 {
-	mat4 rotationMatrix = mat4( cos(preferredRotation), -sin(preferredRotation), 0.0, 0.0,
-							    sin(preferredRotation),  cos(preferredRotation), 0.0, 0.0,
-												   0.0,					    0.0, 1.0, 0.0,
-												   0.0,					    0.0, 0.0, 1.0);
-    
-    mat2 rotationTextureMatrix = mat2(cos(preferredRotation), -sin(preferredRotation),
-                                      sin(preferredRotation),  cos(preferredRotation)
-                                      );
-    gl_Position = position * rotationMatrix;
-    texCoordVarying = texCoord;// * rotationTextureMatrix;
+    gl_Position = position;
+    texCoordVarying = texCoord;
 }
 

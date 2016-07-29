@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "GPUImage.h"
-#import "APLEAGLView.h"
+#import "LYOpenGLView.h"
+#import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/ALAssetsLibrary.h>
 
 @interface ViewController () <AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -16,10 +16,9 @@
 @property (nonatomic , strong) AVCaptureSession *mCaptureSession; //负责输入和输出设备之间的数据传递
 @property (nonatomic , strong) AVCaptureDeviceInput *mCaptureDeviceInput;//负责从AVCaptureDevice获得输入数据
 @property (nonatomic , strong) AVCaptureVideoDataOutput *mCaptureDeviceOutput; //
-@property (strong,nonatomic) AVCaptureVideoPreviewLayer *mCaptureVideoPreviewLayer;//相机拍摄预览图层
 
 // OpenGL ES
-@property (nonatomic , strong)  APLEAGLView *mGLView;
+@property (nonatomic , strong)  LYOpenGLView *mGLView;
 
 @end
 
@@ -32,24 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.mGLView = (APLEAGLView *)self.view;
-    self.mGLView.chromaThreshold = 1;
-    self.mGLView.lumaThreshold = 1;
+    self.mGLView = (LYOpenGLView *)self.view;
     [self.mGLView setupGL];
     
     self.mCaptureSession = [[AVCaptureSession alloc] init];
     self.mCaptureSession.sessionPreset = AVCaptureSessionPreset640x480;
-    
-    
-    
-//    self.mCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:self.mCaptureSession];
-//    self.mCaptureVideoPreviewLayer.frame = self.view.layer.bounds;
-//    self.mCaptureVideoPreviewLayer.videoGravity=AVLayerVideoGravityResizeAspectFill;//填充模式
-//    //将视频预览层添加到界面中
-//    [self.view.layer addSublayer:self.mCaptureVideoPreviewLayer];
-    
-    
-    
     
     mProcessQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     
@@ -78,6 +64,11 @@
     if ([self.mCaptureSession canAddOutput:self.mCaptureDeviceOutput]) {
         [self.mCaptureSession addOutput:self.mCaptureDeviceOutput];
     }
+    
+    AVCaptureConnection *connection = [self.mCaptureDeviceOutput connectionWithMediaType:AVMediaTypeVideo];
+    [connection setVideoOrientation:AVCaptureVideoOrientationPortraitUpsideDown];
+    
+    
     [self.mCaptureSession startRunning];
     
 

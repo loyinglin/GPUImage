@@ -1,12 +1,12 @@
-/*
- Copyright (C) 2015 Apple Inc. All Rights Reserved.
- See LICENSE.txt for this sample’s licensing information
- 
- Abstract:
- This class contains an UIView backed by a CAEAGLLayer. It handles rendering input textures to the view. The object loads, compiles and links the fragment and vertex shader to be used during rendering.
- */
+//
+//  ViewController.m
+//  LearnOpenGLESWithGPUImage
+//
+//  Created by 林伟池 on 16/5/10.
+//  Copyright © 2016年 林伟池. All rights reserved.
+//
 
-#import "APLEAGLView.h"
+#import "LYOpenGLView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVUtilities.h>
 #import <mach/mach_time.h>
@@ -17,9 +17,6 @@ enum
 {
 	UNIFORM_Y,
 	UNIFORM_UV,
-	UNIFORM_LUMA_THRESHOLD,
-	UNIFORM_CHROMA_THRESHOLD,
-	UNIFORM_ROTATION_ANGLE,
 	UNIFORM_COLOR_CONVERSION_MATRIX,
 	NUM_UNIFORMS
 };
@@ -49,7 +46,7 @@ static const GLfloat kColorConversion709[] = {
 		1.793, -0.533,   0.0,
 };
 
-@interface APLEAGLView ()
+@interface LYOpenGLView ()
 {
 	// The pixel dimensions of the CAEAGLLayer.
 	GLint _backingWidth;
@@ -78,7 +75,7 @@ static const GLfloat kColorConversion709[] = {
 
 @end
 
-@implementation APLEAGLView
+@implementation LYOpenGLView
 
 + (Class)layerClass
 {
@@ -99,16 +96,13 @@ static const GLfloat kColorConversion709[] = {
 		eaglLayer.drawableProperties = @{ kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:NO],
 										  kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8};
 
-		// Set the context into which the frames will be drawn.
 		_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
 		if (!_context || ![EAGLContext setCurrentContext:_context] || ![self loadShaders]) {
 			return nil;
 		}
 		
-		// Set the default conversion to BT.709, which is the standard for HDTV.
 		_preferredConversion = kColorConversion709;
-//        _presentationRect = CGSizeMake(640, 480);
 	}
 	return self;
 }
@@ -126,9 +120,7 @@ static const GLfloat kColorConversion709[] = {
 	// 0 and 1 are the texture IDs of _lumaTexture and _chromaTexture respectively.
 	glUniform1i(uniforms[UNIFORM_Y], 0);
 	glUniform1i(uniforms[UNIFORM_UV], 1);
-	glUniform1f(uniforms[UNIFORM_LUMA_THRESHOLD], self.lumaThreshold);
-	glUniform1f(uniforms[UNIFORM_CHROMA_THRESHOLD], self.chromaThreshold);
-	glUniform1f(uniforms[UNIFORM_ROTATION_ANGLE], self.preferredRotation);
+	
 	glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
 	
 	// Create CVOpenGLESTextureCacheRef for optimal CVPixelBufferRef to GLES texture conversion.
@@ -291,15 +283,10 @@ static const GLfloat kColorConversion709[] = {
 	
 	// Use shader program.
 	glUseProgram(self.program);
-	glUniform1f(uniforms[UNIFORM_LUMA_THRESHOLD], self.lumaThreshold);
-	glUniform1f(uniforms[UNIFORM_CHROMA_THRESHOLD], self.chromaThreshold);
-	glUniform1f(uniforms[UNIFORM_ROTATION_ANGLE], self.preferredRotation);
 	glUniformMatrix3fv(uniforms[UNIFORM_COLOR_CONVERSION_MATRIX], 1, GL_FALSE, _preferredConversion);
 	
-    self.presentationRect = CGSizeMake(_backingWidth, _backingHeight);
-    self.preferredRotation = GLKMathDegreesToRadians(90);
 	// Set up the quad vertices with respect to the orientation and aspect ratio of the video.
-	CGRect vertexSamplingRect = AVMakeRectWithAspectRatioInsideRect(self.presentationRect, self.layer.bounds);
+	CGRect vertexSamplingRect = AVMakeRectWithAspectRatioInsideRect(CGSizeMake(_backingWidth, _backingHeight), self.layer.bounds);
 	
 	// Compute normalized quad coordinates to draw the frame into.
 	CGSize normalizedSamplingSize = CGSizeMake(0.0, 0.0);
@@ -326,28 +313,9 @@ static const GLfloat kColorConversion709[] = {
 			 normalizedSamplingSize.width, normalizedSamplingSize.height,
 	};
 	
-	// Update attribute values.
+	// 更新顶点数据
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, quadVertexData);
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
-
-	/*
-     The texture vertices are set up such that we flip the texture vertically. This is so that our top left origin buffers match OpenGL's bottom left texture coordinate system.
-     */
-//	CGRect textureSamplingRect = CGRectMake(0, 0, 1, 1);
-//	GLfloat quadTextureData[] =  {
-//		CGRectGetMinX(textureSamplingRect), CGRectGetMaxY(textureSamplingRect),
-//		CGRectGetMaxX(textureSamplingRect), CGRectGetMaxY(textureSamplingRect),
-//		CGRectGetMinX(textureSamplingRect), CGRectGetMinY(textureSamplingRect),
-//		CGRectGetMaxX(textureSamplingRect), CGRectGetMinY(textureSamplingRect)
-//	};
-    
-    
-//    GLfloat quadTextureData[] =  {  // 翻转位置
-//        0, 1,
-//        1, 1,
-//        0, 0,
-//        1, 0
-//    };
     
     GLfloat quadTextureData[] =  { // 正常坐标
         0, 0,
@@ -376,7 +344,7 @@ static const GLfloat kColorConversion709[] = {
 	GLuint vertShader, fragShader;
 	NSURL *vertShaderURL, *fragShaderURL;
 	
-	// Create the shader program.
+	
 	self.program = glCreateProgram();
 	
 	// Create and compile the vertex shader.
@@ -426,9 +394,6 @@ static const GLfloat kColorConversion709[] = {
 	// Get uniform locations.
 	uniforms[UNIFORM_Y] = glGetUniformLocation(self.program, "SamplerY");
 	uniforms[UNIFORM_UV] = glGetUniformLocation(self.program, "SamplerUV");
-	uniforms[UNIFORM_LUMA_THRESHOLD] = glGetUniformLocation(self.program, "lumaThreshold");
-	uniforms[UNIFORM_CHROMA_THRESHOLD] = glGetUniformLocation(self.program, "chromaThreshold");
-	uniforms[UNIFORM_ROTATION_ANGLE] = glGetUniformLocation(self.program, "preferredRotation");
 	uniforms[UNIFORM_COLOR_CONVERSION_MATRIX] = glGetUniformLocation(self.program, "colorConversionMatrix");
 	
 	// Release vertex and fragment shaders.
