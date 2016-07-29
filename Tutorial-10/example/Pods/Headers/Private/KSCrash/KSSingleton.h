@@ -1,1 +1,0 @@
-../../../KSCrash/Source/KSCrash/Recording/Tools/KSSingleton.h

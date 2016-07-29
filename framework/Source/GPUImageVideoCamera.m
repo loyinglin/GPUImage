@@ -118,7 +118,7 @@ void setColorConversion709( GLfloat conversionMatrix[9] )
 		[_captureSession addInput:videoInput];
 	}
 	
-	// Add the video frame output	
+	// Add the video frame output
 	videoOutput = [[AVCaptureVideoDataOutput alloc] init];
 	[videoOutput setAlwaysDiscardsLateVideoFrames:NO];
     
