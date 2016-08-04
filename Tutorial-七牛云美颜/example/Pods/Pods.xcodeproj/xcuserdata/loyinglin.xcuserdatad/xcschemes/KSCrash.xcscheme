@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7721D993ED2B6C2DEF3331B64CF7FF53"
-               BuildableName = "libKSCrash.a"
+               BlueprintIdentifier = "D156B67CC686C3061AB92A317CF85A77"
+               BuildableName = "KSCrash.framework"
                BlueprintName = "KSCrash"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7721D993ED2B6C2DEF3331B64CF7FF53"
-            BuildableName = "libKSCrash.a"
+            BlueprintIdentifier = "D156B67CC686C3061AB92A317CF85A77"
+            BuildableName = "KSCrash.framework"
             BlueprintName = "KSCrash"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7721D993ED2B6C2DEF3331B64CF7FF53"
-            BuildableName = "libKSCrash.a"
+            BlueprintIdentifier = "D156B67CC686C3061AB92A317CF85A77"
+            BuildableName = "KSCrash.framework"
             BlueprintName = "KSCrash"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>

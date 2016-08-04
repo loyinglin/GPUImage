@@ -2,13 +2,4 @@
 
 ## General Headers
 
-```
-PLCameraStreamingSession.h
-```
-
-- *Modified* - (void)stillCaptureImage
-
-|      | Description                                                               |
-| ---- | ------------------------------------------------------------------------- |
-| From | ```- (void)stillCaptureImage```                                           |
-| To   | ```- (void)requestCaptureImageWithComplete:(void (^)(UIImage *))block;``` |
+None

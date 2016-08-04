@@ -1,1 +1,1 @@
-../../../PLStreamingKit/Pod/Library/include/PLStreamingKit/PLAudioStreamingConfiguration.h
+../../../../../Pod/Library/include/PLStreamingKit/PLAudioStreamingConfiguration.h

@@ -1,4 +1,4 @@
-# PLCameraStreamingKit Release Notes for 1.1.5
+# PLStreamingKit Release Notes for 1.1.5
 
 ## 内容
 
@@ -8,16 +8,14 @@
 	
 ## 简介
 
-PLCameraStreamingKit 为 iOS 开发者提供直播推流 SDK。
+PLStreamingKit 为 iOS 开发者提供直播推流 SDK。
 
 ## 问题反馈
 
 当你遇到任何问题时，可以通过在 GitHub 的 repo 提交 ```issues``` 来反馈问题，请尽可能的描述清楚遇到的问题，如果有错误信息也一同附带，并且在 ```Labels``` 中指明类型为 bug 或者其他。
 
-[通过这里查看已有的 issues 和提交 Bug](https://github.com/pili-io/PLCameraStreamingKit/issues)
+[通过这里查看已有的 issues 和提交 Bug](https://github.com/pili-engineering/PLStreamingKit/issues)
 
-## 记录
+## hotfix
 
-### 网络
-
-- 修复了重连后无法播放的问题
+- 修复 `v1.1.1` 版本引入的断网时引起的 UI 卡死问题

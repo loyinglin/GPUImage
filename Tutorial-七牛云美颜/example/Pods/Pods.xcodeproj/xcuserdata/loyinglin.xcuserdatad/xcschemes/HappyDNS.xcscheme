@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0DC8BCC337CBE1F795C675E87C3D1B3E"
-               BuildableName = "libHappyDNS.a"
+               BlueprintIdentifier = "6595DCB2E7BB11C13EFF37A20E80AE91"
+               BuildableName = "HappyDNS.framework"
                BlueprintName = "HappyDNS"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0DC8BCC337CBE1F795C675E87C3D1B3E"
-            BuildableName = "libHappyDNS.a"
+            BlueprintIdentifier = "6595DCB2E7BB11C13EFF37A20E80AE91"
+            BuildableName = "HappyDNS.framework"
             BlueprintName = "HappyDNS"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0DC8BCC337CBE1F795C675E87C3D1B3E"
-            BuildableName = "libHappyDNS.a"
+            BlueprintIdentifier = "6595DCB2E7BB11C13EFF37A20E80AE91"
+            BuildableName = "HappyDNS.framework"
             BlueprintName = "HappyDNS"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>

@@ -1,6 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-target 'PLCameraStreamingKit' do
-  pod "PLCameraStreamingKit", :path => "../"
+target 'PLStreamingKit_Example' do
+  pod "PLStreamingKit", :path => "../"
+  pod "GPUImage"
   pod "KSCrash"
+end
+
+target 'PLStreamingKit_Tests' do
+  pod "PLStreamingKit", :path => "../"
 end

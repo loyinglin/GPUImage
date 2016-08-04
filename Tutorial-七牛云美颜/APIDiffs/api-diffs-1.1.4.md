@@ -2,4 +2,8 @@
 
 ## General Headers
 
-None
+```PLStreamingSession.h```
+
+- *Added* Category `PLStreamingSession (Network)`
+    - *Added* `@property (nonatomic, assign) int   receiveTimeout;`
+    - *Added* `@property (nonatomic, assign) int   sendTimeout;`

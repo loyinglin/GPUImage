@@ -19,10 +19,15 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>Pods-PLCameraStreamingKit.xcscheme</key>
+		<key>Pods-PLStreamingKit_Example.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>Pods-PLStreamingKit_Tests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>pili-librtmp.xcscheme</key>
 		<dict>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0DC8BCC337CBE1F795C675E87C3D1B3E</key>
+		<key>0587A858C2369B63A81F565797B421CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2BAC7CF49C86172B8F10A9ADFC08EF59</key>
+		<key>6595DCB2E7BB11C13EFF37A20E80AE91</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6610362E50A6DE8BACCA1F2885CD9157</key>
+		<key>84BF282914FF2F941EC4159C3C77E0EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7721D993ED2B6C2DEF3331B64CF7FF53</key>
+		<key>BF8D8653EEE5D30B4E9E424FD748CDCC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>798B6B4E9FEC91D74E94A8CB34C2239D</key>
+		<key>D156B67CC686C3061AB92A317CF85A77</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA0DD8ED489933744D70DD4A9719ED01</key>
 		<dict>
 			<key>primary</key>
 			<true/>

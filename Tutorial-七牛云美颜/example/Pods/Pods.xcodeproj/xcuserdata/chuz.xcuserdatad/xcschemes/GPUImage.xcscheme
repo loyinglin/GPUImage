@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6610362E50A6DE8BACCA1F2885CD9157"
-               BuildableName = "libGPUImage.a"
+               BlueprintIdentifier = "EA0DD8ED489933744D70DD4A9719ED01"
+               BuildableName = "GPUImage.framework"
                BlueprintName = "GPUImage"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6610362E50A6DE8BACCA1F2885CD9157"
-            BuildableName = "libGPUImage.a"
+            BlueprintIdentifier = "EA0DD8ED489933744D70DD4A9719ED01"
+            BuildableName = "GPUImage.framework"
             BlueprintName = "GPUImage"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6610362E50A6DE8BACCA1F2885CD9157"
-            BuildableName = "libGPUImage.a"
+            BlueprintIdentifier = "EA0DD8ED489933744D70DD4A9719ED01"
+            BuildableName = "GPUImage.framework"
             BlueprintName = "GPUImage"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
