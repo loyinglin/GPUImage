@@ -383,27 +383,6 @@ PLStreamingSendingBufferDelegate
 }
 
 //#define CIImageDefine 1
-- (CVPixelBufferRef)pixelBufferFaster:(CGImageRef)image{
-    CVPixelBufferRef pxbuffer = NULL;
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
-                             [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
-                             nil, nil];
-    
-    size_t width =  CGImageGetWidth(image);
-    size_t height = CGImageGetHeight(image);
-    size_t bytesPerRow = CGImageGetBytesPerRow(image);
-    
-    CFDataRef  dataFromImageDataProvider = CGDataProviderCopyData(CGImageGetDataProvider(image));
-    GLubyte  *imageData = (GLubyte *)CFDataGetBytePtr(dataFromImageDataProvider);
-    
-    CVPixelBufferCreateWithBytes(kCFAllocatorDefault,width,height,kCVPixelFormatType_32ARGB,imageData,bytesPerRow,NULL,NULL,(__bridge CFDictionaryRef)options,&pxbuffer);
-    
-    CFRelease(dataFromImageDataProvider);
-    
-    return pxbuffer;
-    
-}
 
 #pragma mark   ---------- 加滤镜  ----------
 - (CVPixelBufferRef)cameraStreamingSession:(PLCameraStreamingSession *)session cameraSourceDidGetPixelBuffer:(CVPixelBufferRef)pixelBuffer{
@@ -430,21 +409,45 @@ PLStreamingSendingBufferDelegate
 #endif
     }
     
+    /*
+     大体的思路就是 CVPixelBufferRef 转到 CGImageRef 再转 GPUImagePicture  然后加滤镜，再转成UIImage 然后就是 CGImageRef  再到 CVPixelBufferRef。最后return CVPixelBufferRef
+     
+     */
     
     size_t width = CVPixelBufferGetWidth(pixelBuffer);
     size_t height = CVPixelBufferGetHeight(pixelBuffer);
+    size_t bytePerRow = CVPixelBufferGetBytesPerRow(pixelBuffer);
+    size_t bitPerCompoment = 8;
+    size_t bitPerPixel = 4 * bitPerCompoment;
+    size_t length = CVPixelBufferGetDataSize(pixelBuffer);
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
     void *baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer);
-    
-    GPUImageRawDataInput *dataInput = [[GPUImageRawDataInput alloc] initWithBytes:baseAddress size:CGSizeMake(width, height) pixelFormat:(GPUPixelFormat)GPUPixelFormatBGRA type:(GPUPixelType)GPUPixelTypeUByte];
+    unsigned char *imageData = (unsigned char *)malloc(length);
+    memcpy(imageData, baseAddress, length);
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     
+    [self.class convertBGRAtoRGBA:imageData withSize:length];
+    CFDataRef data = CFDataCreate(NULL, imageData, length);
+    free(imageData);
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData(data);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGImageRef image = CGImageCreate(width, height, bitPerCompoment, bitPerPixel, bytePerRow, colorSpace, bitmapInfo, provider, NULL, NULL, kCGRenderingIntentDefault);
+    
+    CFRelease(data);
+    CGColorSpaceRelease(colorSpace);
+    CGDataProviderRelease(provider);
+    
     CVPixelBufferRef ret;
-    GPUImageBeautifyFilter *filter = [[GPUImageBeautifyFilter alloc] init];
-    [dataInput addTarget:filter];
-    [dataInput processData];
+    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithCGImage:image];
+    CGImageRelease(image);
+    
+    GPUImageSepiaFilter *filter = [[GPUImageSepiaFilter alloc] init];    
+    [picture addTarget:filter];
+    [picture processImage];
     
     [filter useNextFrameForImageCapture];
+    
     UIImage *imageSecond = [filter imageFromCurrentFramebuffer];
     //  imageSecond  有时候会变成空的
     if (!imageSecond) {
@@ -457,8 +460,8 @@ PLStreamingSendingBufferDelegate
     
     CGImageRef imageThird = [imageSecond CGImage];
     
-//    ret = [self pixelBufferFromCGImage:imageThird];
-    ret = [self pixelBufferFaster:imageThird];
+    
+    ret = [self pixelBufferFromCGImage:imageThird];
     if (!ret) {
         ret = pixelBuffer;
     }
@@ -481,6 +484,7 @@ PLStreamingSendingBufferDelegate
 
 - (CVPixelBufferRef)pixelBufferFromCGImage:(CGImageRef)image
 {
+    
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                              [NSNumber numberWithBool:YES], kCVPixelBufferCGImageCompatibilityKey,
                              [NSNumber numberWithBool:YES], kCVPixelBufferCGBitmapContextCompatibilityKey,
