@@ -37,30 +37,43 @@
     GLint vector = [GPUImageContext maximumVaryingVectorsForThisDevice];
     NSLog(@"%d %d %d", size, unit, vector);
     
+    [self testCIImage];
+}
+
+- (void)testCIImage {
+    UIImage *inputImage = [UIImage imageNamed:@"face.png"];
+    
     _mCIImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame) / 2, CGRectGetHeight(self.view.frame) / 2)];
     [self.view addSubview:self.mCIImageView];
     
     
-    
     /**
      CoreImage在IOS上有很高的效率，但是滤镜和渲染操作也会对主线程造成影响。应该将CoreImage滤镜渲染操作放在后台线程执行，当这些操作介绍后在返回主线程进行界面的更新。
+     
+     有一个CIImage，上面配置了强度为0.5的棕色滤镜，现在通过滑块将强度改为0.6，这个滤镜应该用在新的CIImage上，如果不是新的CIImage上，那么原来的CIImage中将包含强度为0.5和0.6的棕色滤镜
      **/
-    CIFilter *filter = [CIFilter filterWithName:@"CISepiaTone"];
-    [filter setValue:inputImage forKey:@"inputImage"];
-    [filter setValue:[NSNumber numberWithFloat:0.8] forKey:@"inputIntensity"];
+    
+    CFAbsoluteTime elapsedTime, startTime = CFAbsoluteTimeGetCurrent();
+    
+    CIImage *ciInputImage = [CIImage imageWithCGImage:inputImage.CGImage];
+    
+    CIFilter *sepiaTone = [CIFilter filterWithName:@"CISepiaTone"
+                                     keysAndValues: kCIInputImageKey, ciInputImage,
+                           @"inputIntensity", [NSNumber numberWithFloat:1.0], nil];
+    
+    CIImage *result = [sepiaTone outputImage];
+    
+    //    UIImage *resultImage = [UIImage imageWithCIImage:result]; // This gives a nil image, because it doesn't render, unless I'm doing something wrong
     
     CIContext *context = [CIContext contextWithOptions:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:kCIContextUseSoftwareRenderer]];//CPU渲染
     
+    CGImageRef resultRef = [context createCGImage:result fromRect:CGRectMake(0, 0, inputImage.size.width, inputImage.size.height)];
+    UIImage *resultImage = [UIImage imageWithCGImage:resultRef];
+    CGImageRelease(resultRef);
+    elapsedTime = CFAbsoluteTimeGetCurrent() - startTime;
+    NSLog(@"%f s", elapsedTime * 1000.0);
     
-    CIImage *ciimage = [filter outputImage];
-    
-    
-    CGImageRef cgimg = [context createCGImage:ciimage fromRect:[ciimage extent]];
-
-    UIImage *uiimage = [UIImage imageWithCGImage:cgimg];
-    CGImageRelease(cgimg);
-    // Use the UIImage in an UIImageView  
-    self.mCIImageView.image = uiimage;
+    self.mCIImageView.image = resultImage;
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
