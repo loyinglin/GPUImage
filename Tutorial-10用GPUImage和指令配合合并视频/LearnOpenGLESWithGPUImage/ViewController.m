@@ -204,8 +204,6 @@
 }
 
 
-
-
 - (void)updateProgress
 {
     self.mLabel.text = [NSString stringWithFormat:@"Progress:%d%%", (int)(self.imageMovieComposition.progress * 100)];

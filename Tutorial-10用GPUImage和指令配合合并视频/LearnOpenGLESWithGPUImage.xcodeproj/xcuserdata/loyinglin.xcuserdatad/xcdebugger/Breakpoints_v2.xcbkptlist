@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x63a8;&#x6d41;/Libs/GPUImage/framework/Source/GPUImageFilter.m"
-            timestampString = "493629466.618478"
+            filePath = "../framework/Source/GPUImageMovie.m"
+            timestampString = "497770785.845449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-useNextFrameForImageCapture"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
+            landmarkName = "-progress"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x63a8;&#x6d41;/Libs/GPUImage/framework/Source/GPUImageFilter.m"
-            timestampString = "493629477.956999"
+            filePath = "../framework/Source/GPUImageMovie.m"
+            timestampString = "497770787.815821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-newCGImageFromCurrentlyProcessedOutput"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
+            landmarkName = "-progress"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
