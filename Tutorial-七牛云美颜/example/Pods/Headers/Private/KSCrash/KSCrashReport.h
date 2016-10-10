@@ -1,1 +1,0 @@
-../../../KSCrash/Source/KSCrash/Recording/KSCrashReport.h

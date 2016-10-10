@@ -1,6 +1,0 @@
-framework module pili_librtmp {
-  umbrella header "pili-librtmp-umbrella.h"
-
-  export *
-  module * { export * }
-}
