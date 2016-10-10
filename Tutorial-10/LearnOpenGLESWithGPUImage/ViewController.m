@@ -55,14 +55,11 @@
 {
     AVURLAsset *asset3 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"abc" ofType:@"mp4"]]];
     AVURLAsset *asset2 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"qwe" ofType:@"mp4"]]];
-    //    AVURLAsset *asset1 = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eer" ofType:@"mp4"]]];
-    
     
     dispatch_group_t dispatchGroup = dispatch_group_create();
     NSArray *assetKeysToLoadAndTest = @[@"tracks", @"duration", @"composable"];
     
     // 加载视频
-    //    [self loadAsset:asset1 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
     [self loadAsset:asset2 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
     [self loadAsset:asset3 withKeys:assetKeysToLoadAndTest usingDispatchGroup:dispatchGroup];
     
@@ -206,8 +203,8 @@
 
 - (void)updateProgress
 {
-    self.mLabel.text = [NSString stringWithFormat:@"Progress:%d%%", (int)(self.imageMovieComposition.progress * 100)];
-    [self.mLabel sizeToFit];
+//    self.mLabel.text = [NSString stringWithFormat:@"Progress:%d%%", (int)(self.imageMovieComposition.progress * 100)];
+//    [self.mLabel sizeToFit];
 }
 
 

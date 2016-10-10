@@ -10,7 +10,6 @@
 #import <CoreMedia/CoreMedia.h>
 
 @interface SimpleEditor ()
-
 @property (nonatomic, readwrite, retain) AVMutableComposition *composition;
 @property (nonatomic, readwrite, retain) AVMutableVideoComposition *videoComposition;
 @property (nonatomic, readwrite, retain) AVMutableAudioMix *audioMix;
