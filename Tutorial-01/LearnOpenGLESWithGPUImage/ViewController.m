@@ -22,13 +22,15 @@
     UIImageView* imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:imageView];
     self.mImageView = imageView;
-    [self onCustom:nil];
+    [self onCustom];
 }
 
-- (void)onCustom:(id)sender {
+- (void)onCustom {
     GPUImageSepiaFilter* filter = [[GPUImageSepiaFilter alloc] init];
     UIImage* image = [UIImage imageNamed:@"face"];
-    [self.mImageView setImage:[filter imageByFilteringImage:image]];
+    if (image) {
+        [self.mImageView setImage:[filter imageByFilteringImage:image]];
+    }
     
 }
 
