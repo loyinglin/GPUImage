@@ -18,14 +18,11 @@
 #import "CalculatorTools.h"
 
 @interface ViewController () <GPUImageVideoCameraDelegate>
-@property (nonatomic , strong) UILabel  *mLabel;
-
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
 @property (nonatomic , strong) GPUImageMovieWriter *movieWriter;
 @property (nonatomic , strong) GPUImageUIElement *faceView;
 @property (nonatomic, strong) GPUImageView *filterView;
 @property (nonatomic , strong) GPUImageAddBlendFilter *blendFilter;
-@property (nonatomic , strong) dispatch_queue_t queue;
 /*
  人脸识别
  */
@@ -43,23 +40,21 @@
 {
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 人脸识别
     self.viewCanvas = [[CanvasView alloc] initWithFrame:self.view.bounds];
     self.viewCanvas.backgroundColor = [UIColor clearColor];
     self.viewCanvas.headMap = [UIImage imageNamed:@"Crown"];
-    
-    
     self.faceDetector = [IFlyFaceDetector sharedInstance];
     if(self.faceDetector){
         [self.faceDetector setParameter:@"1" forKey:@"detect"];
         [self.faceDetector setParameter:@"1" forKey:@"align"];
     }
     
-    self.queue = dispatch_queue_create("com.test.ly", DISPATCH_QUEUE_SERIAL);
-    
+    // 滤镜初始化
     self.faceView = [[GPUImageUIElement alloc] initWithView:self.viewCanvas];
-    
     self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
     self.videoCamera.delegate = self;
     self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -68,26 +63,30 @@
     self.filterView.center = self.view.center;
     [self.view addSubview:self.filterView];
     
-    
+    // 录像文件
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]);
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
     
+    // 配置录制信息
     _movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
-    
     self.videoCamera.audioEncodingTarget = _movieWriter;
     _movieWriter.encodingLiveVideo = YES;
     [self.videoCamera startCameraCapture];
+    
+    // 响应链配置
     GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
     [self.videoCamera addTarget:beautifyFilter];
     self.blendFilter = [[GPUImageAddBlendFilter alloc] init];
     [beautifyFilter addTarget:self.blendFilter];
     [self.faceView addTarget:self.blendFilter];
-    
     [beautifyFilter addTarget:self.filterView];
     [self.blendFilter addTarget:_movieWriter];
+    
+    // 开始录制
     [_movieWriter startRecording];
     
+    // 结束回调
     __weak typeof (self) weakSelf = self;
     [beautifyFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
         NSLog(@"update ui");
@@ -97,6 +96,7 @@
         });
     }];
     
+    // 保存到相册
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [beautifyFilter removeTarget:_movieWriter];
         [_movieWriter finishRecording];
@@ -123,6 +123,8 @@
             NSLog(@"error mssg)");
         }
     });
+    
+    // 最后添加，保证在最上层
     [self.view addSubview:self.viewCanvas];
 }
 
@@ -133,9 +135,7 @@
     //识别结果，json数据
     NSString* strResult=[self.faceDetector trackFrame:faceImg.data withWidth:faceImg.width height:faceImg.height direction:(int)faceImg.direction];
     
-    
     [self praseTrackResult:strResult OrignImage:faceImg];
-    
     //此处清理图片数据，以防止因为不必要的图片数据的反复传递造成的内存卷积占用
     faceImg.data=nil;
     faceImg=nil;
@@ -146,7 +146,6 @@
 /*
  人脸识别
  */
-
 -(void)praseTrackResult:(NSString*)result OrignImage:(IFlyFaceImage*)faceImg{
     
     if(!result){
@@ -179,7 +178,6 @@
         }
         
         //检测到人脸
-        
         NSMutableArray *arrPersons = [NSMutableArray array] ;
         
         for(id faceInArr in faceArray){
@@ -235,7 +233,6 @@
     if(!landmarkDic){
         return nil;
     }
-    
     // 判断摄像头方向
     BOOL isFrontCamera = self.videoCamera.cameraPosition == AVCaptureDevicePositionFront;
     
@@ -312,7 +309,6 @@
     CGFloat left=[[positionDic objectForKey:KCIFlyFaceResultLeft] floatValue];
     CGFloat right=[[positionDic objectForKey:KCIFlyFaceResultRight] floatValue];
     
-    
     float cx = (left+right)/2;
     float cy = (top + bottom)/2;
     float w = right - left;
@@ -337,7 +333,6 @@
 
 
 - (IFlyFaceImage *) faceImageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer{
-    
     //获取灰度图像数据
     CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
@@ -425,7 +420,6 @@
 
 #pragma mark - 判断视频帧方向
 -(IFlyFaceDirectionType)faceImageOrientation {
-    
     IFlyFaceDirectionType faceOrientation=IFlyFaceDirectionTypeLeft;
     BOOL isFrontCamera = self.videoCamera.cameraPosition == AVCaptureDevicePositionFront;
     switch (self.interfaceOrientation) {
@@ -444,7 +438,6 @@
         default:{//
             faceOrientation=isFrontCamera?IFlyFaceDirectionTypeDown:IFlyFaceDirectionTypeUp;
         }
-            
             break;
     }
     
