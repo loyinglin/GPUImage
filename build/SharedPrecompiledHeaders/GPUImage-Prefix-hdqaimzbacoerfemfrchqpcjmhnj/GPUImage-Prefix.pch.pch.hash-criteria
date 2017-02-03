@@ -1,0 +1,27 @@
+-x
+objective-c
+-arch
+arm64
+-std=gnu99
+-fobjc-arc
+-fmodules
+-fmodules-cache-path=/Users/loyinglin/Library/Developer/Xcode/DerivedData/ModuleCache
+-fbuild-session-file=/Users/loyinglin/Library/Developer/Xcode/DerivedData/ModuleCache/Session.modulevalidation
+-fpascal-strings
+-O0
+-fno-common
+-DDEBUG=1
+-DOBJC_OLD_DISPATCH_PROTOTYPES=0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk
+-miphoneos-version-min=4.3
+-g
+-fembed-bitcode-marker
+-iquote
+-iquote
+-I/Users/loyinglin/Documents/Learn/GPUImage/build/Debug-iphoneos/include
+-F/Users/loyinglin/Documents/Learn/GPUImage/build/Debug-iphoneos
+aarch64-apple-darwin16.3.0
+"4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)"
+SDK_PRODUCT_BUILD_VERSION=14C89
+14C89
