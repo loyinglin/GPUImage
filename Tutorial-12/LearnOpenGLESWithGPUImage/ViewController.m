@@ -28,6 +28,10 @@
     _videoCamera.outputImageOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
     _filter = [[GPUImageSobelEdgeDetectionFilter alloc] init];
+    _filter.edgeStrength = 2;
+//    _filter.texelWidth = _filter.texelWidth * 2;
+//    _filter.texelHeight = _filter.texelHeight * 2;
+    
     _filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
     self.view = _filterView;
             
