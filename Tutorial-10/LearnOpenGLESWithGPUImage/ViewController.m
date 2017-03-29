@@ -114,7 +114,7 @@
     
     
     self.imageMovieComposition = [[GPUImageMovieComposition alloc] initWithComposition:self.editor.composition andVideoComposition:self.editor.videoComposition andAudioMix:self.editor.audioMix];
-    self.imageMovieComposition.playAtActualSpeed = YES;
+//    self.imageMovieComposition.playAtActualSpeed = YES;
     self.imageMovieComposition.runBenchmark = YES;
     
     [self.imageMovieComposition addTarget:self.movieWriter];

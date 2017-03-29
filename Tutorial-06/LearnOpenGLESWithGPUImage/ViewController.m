@@ -50,6 +50,10 @@
     
     movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
     Boolean audioFromFile = NO;
+    [movieWriter setAudioProcessingCallback:^(SInt16 **samplesRef, CMItemCount numSamplesInBuffer) {
+        
+     
+    }];
     if (audioFromFile) {
         // 响应链
         [movieFile addTarget:filter];
