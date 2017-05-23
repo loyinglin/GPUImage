@@ -24,11 +24,11 @@
     self.mGPUVideoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
     self.mGPUImageView.fillMode = kGPUImageFillModeStretch;//kGPUImageFillModePreserveAspectRatioAndFill;
     
-    //GPUImageSepiaFilter* filter = [[GPUImageSepiaFilter alloc] init];
-    //[self.mGPUVideoCamera addTarget:filter];
-    //[filter addTarget:self.mGPUImageView];
+    GPUImageSepiaFilter* filter = [[GPUImageSepiaFilter alloc] init];
+    [self.mGPUVideoCamera addTarget:filter];
+    [filter addTarget:self.mGPUImageView];
     
-    [self.mGPUVideoCamera addTarget:self.mGPUImageView];
+    //[self.mGPUVideoCamera addTarget:self.mGPUImageView];
 
     [self.mGPUVideoCamera startCameraCapture];
     
