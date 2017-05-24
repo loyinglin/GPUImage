@@ -8,7 +8,8 @@
 
 #import "ViewController.h"
 #import <GPUImageView.h>
-#import <GPUImage/GPUImageSepiaFilter.h>
+//#import <GPUImage/GPUImageSepiaFilter.h>
+#import <GPUImage/GPUImage.h>
 
 @interface ViewController ()
 @property (nonatomic , strong) UIImageView* mImageView;
@@ -19,19 +20,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:imageView];
     self.mImageView = imageView;
     [self onCustom];
 }
 
 - (void)onCustom {
-    GPUImageSepiaFilter* filter = [[GPUImageSepiaFilter alloc] init];
-    UIImage* image = [UIImage imageNamed:@"face"];
+    GPUImageFilter *filter = [[GPUImageSepiaFilter alloc] init];
+    UIImage *image = [UIImage imageNamed:@"face"];
     if (image) {
-        [self.mImageView setImage:[filter imageByFilteringImage:image]];
+        self.mImageView.image = [filter imageByFilteringImage:image];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
