@@ -58,8 +58,23 @@
     // 1080 1920，这里已知视频的尺寸。如果不清楚视频的尺寸，可以先读取视频帧CVPixelBuffer，再用CVPixelBufferGetHeight/Width
     GPUImageCropFilter *cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake((1920 - 1080) / 2 / 1920, 0, 1080.0 / 1920, 1)];
     
-    [imageMovie addTarget:cropFilter];
-    [cropFilter addTarget:imageView];
+    GPUImageTransformFilter *transformFilter = [[GPUImageTransformFilter alloc] init];
+    transformFilter.affineTransform = CGAffineTransformMakeRotation(M_PI_2);
+    
+    GPUImageOutput *tmpFilter;
+    
+    tmpFilter = imageMovie;
+    
+    [tmpFilter addTarget:cropFilter];
+    tmpFilter = cropFilter;
+    
+    [tmpFilter addTarget:transformFilter];
+    tmpFilter = transformFilter;
+//    [imageView setInputRotation:kGPUImageRotateRight atIndex:0];
+    
+    [tmpFilter addTarget:imageView];
+    
+    
     imageMovie.playAtActualSpeed = YES;
     imageMovie.shouldRepeat = YES;
     
