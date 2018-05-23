@@ -242,6 +242,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
 
 - (void)activateFramebuffer;
 {
+    NSLog(@"activateFramebuffer id:%d", framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glViewport(0, 0, (int)_size.width, (int)_size.height);
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FD4D741820B5090900373687 /* qwe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD4D741420B5090900373687 /* qwe.mp4 */; };
 		FD4D741920B5090900373687 /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD4D741720B5090900373687 /* abc.mp4 */; };
+		FD4D742920B55FD800373687 /* LYMultiTextureFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4D742520B55FD700373687 /* LYMultiTextureFilter.m */; };
 		FD5FCD541CFC86430094752B /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = FD5FCD531CFC86430094752B /* face.png */; };
 		FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2521CE1CD7A00C7B6AC /* main.m */; };
 		FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */; };
@@ -56,6 +57,8 @@
 /* Begin PBXFileReference section */
 		FD4D741420B5090900373687 /* qwe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = qwe.mp4; path = "../../Tutorial-08/LearnOpenGLESWithGPUImage/qwe.mp4"; sourceTree = "<group>"; };
 		FD4D741720B5090900373687 /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = "../../Tutorial-08/LearnOpenGLESWithGPUImage/abc.mp4"; sourceTree = "<group>"; };
+		FD4D742520B55FD700373687 /* LYMultiTextureFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYMultiTextureFilter.m; sourceTree = "<group>"; };
+		FD4D742820B55FD800373687 /* LYMultiTextureFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYMultiTextureFilter.h; sourceTree = "<group>"; };
 		FD5FCD531CFC86430094752B /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
 		FDAAD24E1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnOpenGLESWithGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD2521CE1CD7A00C7B6AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 		FDAAD2501CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */ = {
 			isa = PBXGroup;
 			children = (
+				FD4D742820B55FD800373687 /* LYMultiTextureFilter.h */,
+				FD4D742520B55FD700373687 /* LYMultiTextureFilter.m */,
 				FD4D741720B5090900373687 /* abc.mp4 */,
 				FD4D741420B5090900373687 /* qwe.mp4 */,
 				FD5FCD531CFC86430094752B /* face.png */,
@@ -306,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD4D742920B55FD800373687 /* LYMultiTextureFilter.m in Sources */,
 				FDAAD2591CE1CD7A00C7B6AC /* ViewController.m in Sources */,
 				FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */,
 				FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */,

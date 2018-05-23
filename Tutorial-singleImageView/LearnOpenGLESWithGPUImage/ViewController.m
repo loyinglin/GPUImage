@@ -8,16 +8,24 @@
 
 #import "ViewController.h"
 #import "GPUImage.h"
+#import "LYMultiTextureFilter.h"
 
 @interface ViewController ()
 @property (nonatomic, strong) NSMutableArray<GPUImageView *> *gpuImageViewArray;
 @property (nonatomic, strong) NSMutableArray<GPUImageMovie *> *gpuImageMovieArray;
 
 @property (nonatomic, strong) CADisplayLink *mDisplayLink;
+
+@property (nonatomic, strong) LYMultiTextureFilter *lyMultiTextureFilter;
 @end
 
 
 @implementation ViewController
+
+#define MaxFilter (6)
+#define MaxRow (2)
+#define MaxColumn (3)
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,18 +34,21 @@
     self.gpuImageMovieArray = [[NSMutableArray<GPUImageMovie *> alloc] init];
     NSArray *fileNamesArray = @[@"abc", @"qwe", @"abc", @"qwe", @"abc", @"qwe"];
     
-    for (int indexRow = 0; indexRow < 2; ++indexRow) {
-        for (int indexColumn = 0; indexColumn < 3; ++indexColumn) {
-            CGRect frame = CGRectMake(CGRectGetWidth(self.view.bounds) / 3 * indexColumn,
-                                      100 + CGRectGetWidth(self.view.bounds) / 3 * indexRow,
-                                      CGRectGetWidth(self.view.bounds) / 3,
-                                      CGRectGetWidth(self.view.bounds) / 3);
-            GPUImageMovie *movie = [self getGPUImageMovieWithFileName:fileNamesArray[indexRow * 3 + indexColumn]];
-            GPUImageView *view = [self buildGPUImageViewWithFrame:frame imageMovie:movie];
-            [self.gpuImageViewArray addObject:view];
+    self.lyMultiTextureFilter = [[LYMultiTextureFilter alloc] initWithMaxFilter:MaxFilter];
+    for (int indexRow = 0; indexRow < MaxRow; ++indexRow) {
+        for (int indexColumn = 0; indexColumn < MaxColumn; ++indexColumn) {
+            CGRect frame = CGRectMake(indexColumn * 1.0 / MaxColumn,
+                                      indexRow * 1.0 / MaxRow,
+                                      1.0 / MaxColumn,
+                                      1.0 / MaxRow);
+            GPUImageMovie *movie = [self getGPUImageMovieWithFileName:fileNamesArray[indexRow * MaxColumn + indexColumn]];
+            [self buildGPUImageViewWithFrame:frame imageMovie:movie];
             [self.gpuImageMovieArray addObject:movie];
         }
     }
+    GPUImageView *imageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / MaxColumn * MaxRow)];
+    [self.lyMultiTextureFilter addTarget:imageView];
+    [self.view addSubview:imageView];
     
     self.mDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displaylink:)];
     [self.mDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -50,11 +61,7 @@
     return imageMovie;
 }
 
-- (GPUImageView *)buildGPUImageViewWithFrame:(CGRect)frame imageMovie:(GPUImageMovie *)imageMovie {
-    
-    GPUImageView *imageView = [[GPUImageView alloc] initWithFrame:frame];
-    [self.view addSubview:imageView];
-    
+- (void)buildGPUImageViewWithFrame:(CGRect)frame imageMovie:(GPUImageMovie *)imageMovie {
     // 1080 1920，这里已知视频的尺寸。如果不清楚视频的尺寸，可以先读取视频帧CVPixelBuffer，再用CVPixelBufferGetHeight/Width
     GPUImageCropFilter *cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:CGRectMake((1920 - 1080) / 2 / 1920, 0, 1080.0 / 1920, 1)];
     
@@ -72,7 +79,9 @@
     tmpFilter = transformFilter;
 //    [imageView setInputRotation:kGPUImageRotateRight atIndex:0];
     
-    [tmpFilter addTarget:imageView];
+    NSInteger index = [self.lyMultiTextureFilter nextAvailableTextureIndex];
+    [tmpFilter addTarget:self.lyMultiTextureFilter atTextureLocation:index];
+    [self.lyMultiTextureFilter setDrawRect:frame atIndex:index];
     
     
     imageMovie.playAtActualSpeed = YES;
@@ -80,7 +89,7 @@
     
     [imageMovie startProcessing];
     
-    return imageView;
+    return ;
 }
 
 - (void)displaylink:(CADisplayLink *)displaylink {
