@@ -419,7 +419,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
         CMSampleBufferRef sampleBufferRef = [readerVideoTrackOutput copyNextSampleBuffer];
         if (sampleBufferRef) 
         {
-            //NSLog(@"read a video frame: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, CMSampleBufferGetOutputPresentationTimeStamp(sampleBufferRef))));
+            //NSLog(@"read a video frame: %@", CFBridginRelease(CMTimeCopyDescription(kCFAllocatorDefault, CMSampleBufferGetOutputPresentationTimeStamp(sampleBufferRef))));
             if (_playAtActualSpeed)
             {
                 // Do this outside of the video processing queue to not slow that down while waiting

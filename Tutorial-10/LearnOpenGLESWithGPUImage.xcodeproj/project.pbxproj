@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD01D7B420B6DF8500D79B25 /* qwe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD01D7B220B6DF8500D79B25 /* qwe.mp4 */; };
+		FD01D7B520B6DF8500D79B25 /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD01D7B320B6DF8500D79B25 /* abc.mp4 */; };
 		FD0605081D24C44800E663A7 /* SimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0605071D24C44800E663A7 /* SimpleEditor.m */; };
-		FD65AC151D1B949800C5C1A4 /* qwe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD65AC141D1B949800C5C1A4 /* qwe.mp4 */; };
-		FD6BA4491D12A8420080EB2D /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4481D12A8420080EB2D /* abc.mp4 */; };
 		FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4501D12CE440080EB2D /* Main.storyboard */; };
 		FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2521CE1CD7A00C7B6AC /* main.m */; };
 		FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */; };
@@ -52,10 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD01D7B220B6DF8500D79B25 /* qwe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = qwe.mp4; path = ../../CommonResources/qwe.mp4; sourceTree = "<group>"; };
+		FD01D7B320B6DF8500D79B25 /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = ../../CommonResources/abc.mp4; sourceTree = "<group>"; };
 		FD0605061D24C44800E663A7 /* SimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleEditor.h; sourceTree = "<group>"; };
 		FD0605071D24C44800E663A7 /* SimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleEditor.m; sourceTree = "<group>"; };
-		FD65AC141D1B949800C5C1A4 /* qwe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = qwe.mp4; sourceTree = "<group>"; };
-		FD6BA4481D12A8420080EB2D /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.mp4; sourceTree = "<group>"; };
 		FD6BA4511D12CE440080EB2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDAAD24E1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnOpenGLESWithGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD2521CE1CD7A00C7B6AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,11 +121,11 @@
 		FDAAD2501CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */ = {
 			isa = PBXGroup;
 			children = (
+				FD01D7B320B6DF8500D79B25 /* abc.mp4 */,
+				FD01D7B220B6DF8500D79B25 /* qwe.mp4 */,
 				FD0605061D24C44800E663A7 /* SimpleEditor.h */,
 				FD0605071D24C44800E663A7 /* SimpleEditor.m */,
-				FD65AC141D1B949800C5C1A4 /* qwe.mp4 */,
 				FD6BA4501D12CE440080EB2D /* Main.storyboard */,
-				FD6BA4481D12A8420080EB2D /* abc.mp4 */,
 				FDAAD2541CE1CD7A00C7B6AC /* AppDelegate.h */,
 				FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */,
 				FDAAD2571CE1CD7A00C7B6AC /* ViewController.h */,
@@ -269,11 +269,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD6BA4491D12A8420080EB2D /* abc.mp4 in Resources */,
 				FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */,
 				FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */,
+				FD01D7B520B6DF8500D79B25 /* abc.mp4 in Resources */,
 				FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */,
-				FD65AC151D1B949800C5C1A4 /* qwe.mp4 in Resources */,
+				FD01D7B420B6DF8500D79B25 /* qwe.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

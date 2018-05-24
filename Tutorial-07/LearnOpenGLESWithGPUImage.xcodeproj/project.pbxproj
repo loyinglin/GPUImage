@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD01D7A720B6DEDA00D79B25 /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD01D7A620B6DEDA00D79B25 /* abc.mp4 */; };
 		FD0A09141D13DED000EC2C32 /* watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = FD0A09131D13DED000EC2C32 /* watermark.png */; };
-		FD6BA4491D12A8420080EB2D /* abc.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4481D12A8420080EB2D /* abc.mp4 */; };
 		FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD6BA4501D12CE440080EB2D /* Main.storyboard */; };
 		FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2521CE1CD7A00C7B6AC /* main.m */; };
 		FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */; };
@@ -51,8 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD01D7A620B6DEDA00D79B25 /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = abc.mp4; path = ../../CommonResources/abc.mp4; sourceTree = "<group>"; };
 		FD0A09131D13DED000EC2C32 /* watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermark.png; sourceTree = "<group>"; };
-		FD6BA4481D12A8420080EB2D /* abc.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.mp4; sourceTree = "<group>"; };
 		FD6BA4511D12CE440080EB2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDAAD24E1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnOpenGLESWithGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD2521CE1CD7A00C7B6AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -118,9 +118,9 @@
 		FDAAD2501CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */ = {
 			isa = PBXGroup;
 			children = (
+				FD01D7A620B6DEDA00D79B25 /* abc.mp4 */,
 				FD0A09131D13DED000EC2C32 /* watermark.png */,
 				FD6BA4501D12CE440080EB2D /* Main.storyboard */,
-				FD6BA4481D12A8420080EB2D /* abc.mp4 */,
 				FDAAD2541CE1CD7A00C7B6AC /* AppDelegate.h */,
 				FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */,
 				FDAAD2571CE1CD7A00C7B6AC /* ViewController.h */,
@@ -263,9 +263,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD6BA4491D12A8420080EB2D /* abc.mp4 in Resources */,
 				FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */,
 				FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */,
+				FD01D7A720B6DEDA00D79B25 /* abc.mp4 in Resources */,
 				FD0A09141D13DED000EC2C32 /* watermark.png in Resources */,
 				FD6BA4521D12CE440080EB2D /* Main.storyboard in Resources */,
 			);
