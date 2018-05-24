@@ -1,10 +1,11 @@
 //
-//  KSAVMergeTwoVideoFilter.m
-//  QQKSong
+//  ViewController.m
+//  LearnOpenGLESWithGPUImage
 //
-//  Created by aimengou on 17/3/21.
-//  Copyright © 2017年 Tencent. All rights reserved.
+//  Created by 林伟池 on 16/5/10.
+//  Copyright © 2016年 林伟池. All rights reserved.
 //
+
 
 #import "LYMultiTextureFilter.h"
 
