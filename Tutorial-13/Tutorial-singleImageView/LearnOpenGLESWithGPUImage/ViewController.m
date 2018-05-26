@@ -46,6 +46,7 @@
         }
     }
     GPUImageView *imageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 100, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / MaxColumn * MaxRow)];
+    imageView.backgroundColor = [UIColor clearColor];
     imageView.fillMode = kGPUImageFillModeStretch;
     [self.lyMultiTextureFilter addTarget:imageView];
     [self.view addSubview:imageView];
