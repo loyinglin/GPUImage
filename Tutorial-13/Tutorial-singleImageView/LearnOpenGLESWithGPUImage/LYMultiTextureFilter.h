@@ -16,9 +16,6 @@
  在newFrame回调的时候，会根据index把图像绘制在绑定的rect
  特别的，会制定一个mainIndex，当此index就绪时调用newFrame通知响应链的下一个
  */
-
-
-
 @interface LYMultiTextureFilter : GPUImageFilter
 
 - (instancetype)initWithMaxFilter:(NSInteger)maxFilter;

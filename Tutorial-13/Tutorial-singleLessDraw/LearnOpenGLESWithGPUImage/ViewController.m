@@ -58,6 +58,7 @@
     imageView.fillMode = kGPUImageFillModeStretch;
     
     [self.lyMultiTextureFilter addTarget:imageView];
+    [self.lyMultiTextureFilter setMainIndex:MaxRow * MaxColumn - 1];
     [self.view addSubview:imageView];
     
 }

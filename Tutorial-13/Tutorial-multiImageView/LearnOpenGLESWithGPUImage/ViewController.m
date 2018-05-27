@@ -12,8 +12,6 @@
 @interface ViewController ()
 @property (nonatomic, strong) NSMutableArray<GPUImageView *> *gpuImageViewArray;
 @property (nonatomic, strong) NSMutableArray<GPUImageMovie *> *gpuImageMovieArray;
-
-@property (nonatomic, strong) CADisplayLink *mDisplayLink;
 @end
 
 
@@ -39,8 +37,6 @@
         }
     }
     
-    self.mDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(displaylink:)];
-    [self.mDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (GPUImageMovie *)getGPUImageMovieWithFileName:(NSString *)fileName {
@@ -82,10 +78,6 @@
     
     return imageView;
 }
-
-- (void)displaylink:(CADisplayLink *)displaylink {
-}
-
 
 
 
