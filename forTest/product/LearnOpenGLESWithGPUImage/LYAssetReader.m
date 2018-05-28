@@ -63,9 +63,13 @@
 }
 
 - (CMSampleBufferRef)readBuffer {
-    CMSampleBufferRef sampleBufferRef = [readerVideoTrackOutput copyNextSampleBuffer];
-    
-    if (assetReader.status == AVAssetReaderStatusCompleted) {
+    CMSampleBufferRef sampleBufferRef = NULL;
+    if (assetReader && assetReader.status == AVAssetReaderStatusReading) {
+        sampleBufferRef = [readerVideoTrackOutput copyNextSampleBuffer];
+    }
+
+    if (assetReader && assetReader.status == AVAssetReaderStatusCompleted) {
+        assetReader = nil;
         [self customInit];
     }
     

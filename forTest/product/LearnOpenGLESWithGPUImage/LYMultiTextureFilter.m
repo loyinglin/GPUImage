@@ -190,7 +190,7 @@
         }
     }
     
-    [[self framebufferForOutput] unlock];
+//    [[self framebufferForOutput] unlock]; 因为要复用，所以一直保留
     
     if (usingNextFrameForImageCapture)
     {
@@ -234,9 +234,7 @@
         glClearColor(backgroundColorRed, backgroundColorGreen, backgroundColorBlue, backgroundColorAlpha);
         glClear(GL_COLOR_BUFFER_BIT);
     }
-    else {
-        [outputFramebuffer lock];
-    }
+    
     [outputFramebuffer activateFramebuffer];
     if (usingNextFrameForImageCapture)
     {
