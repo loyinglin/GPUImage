@@ -14,6 +14,7 @@
 		FD5FCD541CFC86430094752B /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = FD5FCD531CFC86430094752B /* face.png */; };
 		FD61607720B7FDF700A5BA26 /* LYAssetReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FD61607620B7FDF700A5BA26 /* LYAssetReader.m */; };
 		FD7C287B20BBCBBA0095476B /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = FD7C287720BBCBBA0095476B /* test.png */; };
+		FD7C288C20BBE4D00095476B /* KSDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD7C288B20BBE4D00095476B /* KSDataManager.m */; };
 		FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2521CE1CD7A00C7B6AC /* main.m */; };
 		FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2551CE1CD7A00C7B6AC /* AppDelegate.m */; };
 		FDAAD2591CE1CD7A00C7B6AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD2581CE1CD7A00C7B6AC /* ViewController.m */; };
@@ -59,6 +60,8 @@
 		FD61607520B7FDF700A5BA26 /* LYAssetReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYAssetReader.h; sourceTree = "<group>"; };
 		FD61607620B7FDF700A5BA26 /* LYAssetReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYAssetReader.m; sourceTree = "<group>"; };
 		FD7C287720BBCBBA0095476B /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		FD7C288A20BBE4D00095476B /* KSDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSDataManager.h; sourceTree = "<group>"; };
+		FD7C288B20BBE4D00095476B /* KSDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSDataManager.m; sourceTree = "<group>"; };
 		FDAAD24E1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnOpenGLESWithGPUImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD2521CE1CD7A00C7B6AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FDAAD2541CE1CD7A00C7B6AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				FDAAD2581CE1CD7A00C7B6AC /* ViewController.m */,
 				FDAAD25A1CE1CD7A00C7B6AC /* Main.storyboard */,
 				FDAAD2511CE1CD7A00C7B6AC /* Supporting Files */,
+				FD7C288A20BBE4D00095476B /* KSDataManager.h */,
+				FD7C288B20BBE4D00095476B /* KSDataManager.m */,
 			);
 			path = LearnOpenGLESWithGPUImage;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				FDAAD2591CE1CD7A00C7B6AC /* ViewController.m in Sources */,
 				FDAAD2561CE1CD7A00C7B6AC /* AppDelegate.m in Sources */,
 				FDAAD2531CE1CD7A00C7B6AC /* main.m in Sources */,
+				FD7C288C20BBE4D00095476B /* KSDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
