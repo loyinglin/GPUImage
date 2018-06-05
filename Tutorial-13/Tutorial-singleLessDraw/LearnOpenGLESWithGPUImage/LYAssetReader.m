@@ -14,11 +14,13 @@
     AVAssetReaderTrackOutput *readerVideoTrackOutput;
     AVAssetReader   *assetReader;
     NSURL *videoUrl;
+    NSLock *lock;
 }
 
 - (instancetype)initWithUrl:(NSURL *)url {
     self = [super init];
     videoUrl = url;
+    lock = [[NSLock alloc] init];
     [self customInit];
     return self;
 }
@@ -43,6 +45,8 @@
 
 - (void)processWithAsset:(AVAsset *)asset
 {
+    [lock lock];
+    NSLog(@"processWithAsset");
     NSError *error = nil;
     assetReader = [AVAssetReader assetReaderWithAsset:asset error:&error];
     
@@ -58,17 +62,26 @@
     if ([assetReader startReading] == NO)
     {
         NSLog(@"Error reading from file at URL: %@", asset);
-        return;
     }
+    [lock unlock];
 }
 
 - (CMSampleBufferRef)readBuffer {
-    CMSampleBufferRef sampleBufferRef = [readerVideoTrackOutput copyNextSampleBuffer];
+    [lock lock];
+    CMSampleBufferRef sampleBufferRef = nil;
     
-    if (assetReader.status == AVAssetReaderStatusCompleted) {
+    if (readerVideoTrackOutput) {
+        sampleBufferRef = [readerVideoTrackOutput copyNextSampleBuffer];
+    }
+    
+    if (assetReader && assetReader.status == AVAssetReaderStatusCompleted) {
+        NSLog(@"customInit");
+        readerVideoTrackOutput = nil;
+        assetReader = nil;
         [self customInit];
     }
     
+    [lock unlock];
     return sampleBufferRef;
 }
 
