@@ -1,0 +1,26 @@
+-x
+objective-c
+-arch
+armv7
+-std=gnu99
+-fobjc-arc
+-fmodules
+-fmodules-cache-path=/Users/loyinglin/Library/Developer/Xcode/DerivedData/ModuleCache.noindex
+-fbuild-session-file=/Users/loyinglin/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation
+-fpascal-strings
+-Os
+-fno-common
+-DOBJC_OLD_DISPATCH_PROTOTYPES=0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk
+-miphoneos-version-min=4.3
+-g
+-fembed-bitcode-marker
+-iquote
+-iquote
+-I/Users/loyinglin/Documents/loyinglin(backup)/Learn/GPUImage/build/Release-iphoneos/include
+-F/Users/loyinglin/Documents/loyinglin(backup)/Learn/GPUImage/build/Release-iphoneos
+arm-apple-darwin17.5.0
+"4.2.1 Compatible Apple LLVM 9.1.0 (clang-902.0.39.1)"
+SDK_PRODUCT_BUILD_VERSION=15E217
+15E217
