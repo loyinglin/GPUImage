@@ -15,7 +15,7 @@
 		FDAAD25E1CE1CD7A00C7B6AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD25D1CE1CD7A00C7B6AC /* Assets.xcassets */; };
 		FDAAD2611CE1CD7A00C7B6AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAAD25F1CE1CD7A00C7B6AC /* LaunchScreen.storyboard */; };
 		FDAAD26C1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAAD26B1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m */; };
-		FDF35B271CFF0FF30059EAEA /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDF35B221CFF0FE70059EAEA /* libGPUImage.a */; };
+		FDEAACE0215B782400DE6BDB /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD32C39215B6F3800917FC7 /* libGPUImage.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,23 +26,23 @@
 			remoteGlobalIDString = FDAAD24D1CE1CD7A00C7B6AC;
 			remoteInfo = LearnOpenGLESWithGPUImage;
 		};
-		FDF35B211CFF0FE70059EAEA /* PBXContainerItemProxy */ = {
+		FDD32C38215B6F3800917FC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */;
+			containerPortal = FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
 			remoteInfo = GPUImage;
 		};
-		FDF35B231CFF0FE70059EAEA /* PBXContainerItemProxy */ = {
+		FDD32C3A215B6F3800917FC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */;
+			containerPortal = FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCE209E51943F20C002FEED8;
 			remoteInfo = GPUImageFramework;
 		};
-		FDF35B2E1CFF1B980059EAEA /* PBXContainerItemProxy */ = {
+		FDEAACDB215B781B00DE6BDB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */;
+			containerPortal = FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
 			remoteInfo = GPUImage;
@@ -65,7 +65,7 @@
 		FDAAD2671CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LearnOpenGLESWithGPUImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAAD26B1CE1CD7B00C7B6AC /* LearnOpenGLESWithGPUImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LearnOpenGLESWithGPUImageTests.m; sourceTree = "<group>"; };
 		FDAAD26D1CE1CD7B00C7B6AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDF35B271CFF0FF30059EAEA /* libGPUImage.a in Frameworks */,
+				FDEAACE0215B782400DE6BDB /* libGPUImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 		D9659FC4A6DF917D6C94AB64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */,
+				FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,11 +149,11 @@
 			path = LearnOpenGLESWithGPUImageTests;
 			sourceTree = "<group>";
 		};
-		FDF35B1C1CFF0FE60059EAEA /* Products */ = {
+		FDD32C33215B6F3800917FC7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FDF35B221CFF0FE70059EAEA /* libGPUImage.a */,
-				FDF35B241CFF0FE70059EAEA /* GPUImage.framework */,
+				FDD32C39215B6F3800917FC7 /* libGPUImage.a */,
+				FDD32C3B215B6F3800917FC7 /* GPUImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				FDF35B2F1CFF1B980059EAEA /* PBXTargetDependency */,
+				FDEAACDC215B781B00DE6BDB /* PBXTargetDependency */,
 			);
 			name = LearnOpenGLESWithGPUImage;
 			productName = LearnOpenGLESWithGPUImage;
@@ -229,8 +229,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = FDF35B1C1CFF0FE60059EAEA /* Products */;
-					ProjectRef = FDF35B1B1CFF0FE60059EAEA /* GPUImage.xcodeproj */;
+					ProductGroup = FDD32C33215B6F3800917FC7 /* Products */;
+					ProjectRef = FDD32C32215B6F3800917FC7 /* GPUImage.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -242,18 +242,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		FDF35B221CFF0FE70059EAEA /* libGPUImage.a */ = {
+		FDD32C39215B6F3800917FC7 /* libGPUImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGPUImage.a;
-			remoteRef = FDF35B211CFF0FE70059EAEA /* PBXContainerItemProxy */;
+			remoteRef = FDD32C38215B6F3800917FC7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		FDF35B241CFF0FE70059EAEA /* GPUImage.framework */ = {
+		FDD32C3B215B6F3800917FC7 /* GPUImage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GPUImage.framework;
-			remoteRef = FDF35B231CFF0FE70059EAEA /* PBXContainerItemProxy */;
+			remoteRef = FDD32C3A215B6F3800917FC7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -306,10 +306,10 @@
 			target = FDAAD24D1CE1CD7A00C7B6AC /* LearnOpenGLESWithGPUImage */;
 			targetProxy = FDAAD2681CE1CD7B00C7B6AC /* PBXContainerItemProxy */;
 		};
-		FDF35B2F1CFF1B980059EAEA /* PBXTargetDependency */ = {
+		FDEAACDC215B781B00DE6BDB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GPUImage;
-			targetProxy = FDF35B2E1CFF1B980059EAEA /* PBXContainerItemProxy */;
+			targetProxy = FDEAACDB215B781B00DE6BDB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

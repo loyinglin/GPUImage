@@ -12,9 +12,9 @@ typedef enum { kGPUImageNoRotation, kGPUImageRotateLeft, kGPUImageRotateRight, k
 @interface GPUImageContext : NSObject
 
 @property(readonly, nonatomic) dispatch_queue_t contextQueue;
-@property(readwrite, retain, nonatomic) GLProgram *currentShaderProgram;
-@property(readonly, retain, nonatomic) NSOpenGLContext *context;
-@property(readonly) CVOpenGLTextureCacheRef coreVideoTextureCache;
+@property(readwrite, strong, nonatomic) GLProgram *currentShaderProgram;
+@property(readonly, strong, nonatomic) EAGLContext *context;
+@property(readonly) CVOpenGLESTextureCacheRef coreVideoTextureCache;
 @property(readonly) GPUImageFramebufferCache *framebufferCache;
 
 + (void *)contextKey;
@@ -33,7 +33,7 @@ typedef enum { kGPUImageNoRotation, kGPUImageRotateLeft, kGPUImageRotateRight, k
 - (void)presentBufferForDisplay;
 - (GLProgram *)programForVertexShaderString:(NSString *)vertexShaderString fragmentShaderString:(NSString *)fragmentShaderString;
 
-- (void)useSharegroup:(CGLShareGroupObj *)sharegroup;
+- (void)useSharegroup:(EAGLSharegroup *)sharegroup;
 
 // Manage fast texture upload
 + (BOOL)supportsFastTextureUpload;
