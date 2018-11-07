@@ -2,8 +2,8 @@
 //  ViewController.m
 //  LearnOpenGLESWithGPUImage
 //
-//  Created by 林伟池 on 16/5/10.
-//  Copyright © 2016年 林伟池. All rights reserved.
+//  Created by loyinglin on 16/5/10.
+//  Copyright © 2016年 loyinglin. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -63,6 +63,7 @@
     self.filterView.center = self.view.center;
     [self.view addSubview:self.filterView];
     
+    kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
     // 录像文件
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]);
